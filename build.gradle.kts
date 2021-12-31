@@ -31,6 +31,10 @@ plugins {
 group = "io.github.guohao"
 version = "1.0.0-SNAPSHOT"
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 configure<AllOpenExtension> {
     annotation("org.openjdk.jmh.annotations.State")
 }
@@ -58,10 +62,6 @@ dependencies {
 
 tasks.test {
     useJUnit()
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
 }
 
 application {
