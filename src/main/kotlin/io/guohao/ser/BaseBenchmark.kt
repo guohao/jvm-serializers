@@ -17,6 +17,7 @@
 package io.guohao.ser
 
 import com.alibaba.fastjson.JSON
+import kotlinx.benchmark.Mode
 import org.openjdk.jmh.annotations.*
 import java.nio.charset.Charset
 import java.util.concurrent.TimeUnit
@@ -24,8 +25,9 @@ import java.util.concurrent.TimeUnit
 
 @State(Scope.Benchmark)
 @Fork(1)
-@Warmup(iterations = 3)
-@Measurement(iterations = 5, time = 20, timeUnit = TimeUnit.SECONDS)
+@Warmup(iterations = 1, time = 5, timeUnit = TimeUnit.SECONDS)
+@Measurement(iterations = 1, time = 5, timeUnit = TimeUnit.SECONDS)
+@BenchmarkMode(Mode.Throughput)
 abstract class BaseBenchmark<OriginType, TransType>(
     private val serializer: Serializer<TransType>,
     private val dataSource: String,
