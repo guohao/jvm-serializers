@@ -23,17 +23,16 @@ class TransformedSerializer<T, R>(
     private val delegate: Serializer<R>,
     private val transformer: Transformer<T, R>
 ) : Serializer<T> {
-    override fun deserialize(ins: InputStream): T = transformer.transformFrom(delegate.deserialize(ins))
 
     override fun deserialize(array: ByteArray): T = transformer.transformFrom(delegate.deserialize(array))
-
-    override fun serialize(data: T, outs: OutputStream) = delegate.serialize(transformer.transformTo(data), outs)
 
     override fun serialize(data: T): ByteArray = delegate.serialize(transformer.transformTo(data))
 
     override fun create(data: T) {
         transformer.transformTo(data)
     }
+
+    override fun features(): Features = delegate.features()
 }
 
 infix fun <T, R> Serializer<R>.wrap(transformer: Transformer<T, R>) = TransformedSerializer(this, transformer)
