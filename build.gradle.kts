@@ -15,6 +15,7 @@
  */
 
 import kotlinx.benchmark.gradle.benchmark
+import kotlinx.benchmark.gradle.benchmarkReportsDir
 import org.jetbrains.kotlin.allopen.gradle.AllOpenExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -26,6 +27,7 @@ plugins {
     kotlin("plugin.allopen") version "1.6.10"
     id("org.jetbrains.kotlinx.benchmark") version "0.4.1"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
+    id("io.morethan.jmhreport") version "0.9.0"
 }
 
 group = "io.github.guohao"
@@ -77,4 +79,11 @@ benchmark {
             jmhVersion = "1.21"
         }
     }
+}
+
+jmhReport {
+    val reportDir =
+        benchmarkReportsDir(benchmark.configurations.getByName("main"), benchmark.targets.getByName("main"))
+    jmhResultPath = "$reportDir/main.json"
+    jmhReportOutput = "$reportDir"
 }
