@@ -1,10 +1,9 @@
-https://github.com/ngs-doo/dsl-json
-1. 更新依赖版本至
-2. 使用 kotlin 插件
-
-https://bitbucket.org/jmarsden/jsonij/wiki/Home
-1. Remove jsonij
+# jvm-serializers
+A modern serializers' benchmark for jvm environment. This project is inspired by [eishay/jvm-serializers](https://github.com/eishay/jvm-serializers/).
 
 
-https://github.com/FasterXML/jackson-databind
-1. remove jackson 1.x
+## Run
+Just
+```
+./gradlew benchmark
+```
