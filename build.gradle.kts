@@ -25,7 +25,7 @@ plugins {
     kotlin("kapt") version "1.6.10"
     kotlin("plugin.allopen") version "1.6.10"
     id("org.jetbrains.kotlinx.benchmark") version "0.4.1"
-    application
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
 }
 
 group = "io.github.guohao"
@@ -64,15 +64,11 @@ tasks.test {
     useJUnit()
 }
 
-application {
-    mainClass.set("MainKt")
-}
 benchmark {
     configurations {
         named("main") {
             iterationTime = 5
             iterationTimeUnit = "sec"
-
         }
     }
     targets {

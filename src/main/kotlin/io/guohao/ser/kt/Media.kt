@@ -19,7 +19,7 @@ package io.guohao.ser.kt
 import kotlinx.serialization.Serializable
 
 @Serializable
- data class Media(
+data class Media(
     var uri: String? = null,
     var title: String? = null,
     var width: Int = 0,
@@ -38,21 +38,21 @@ enum class Player {
     JAVA, FLASH;
 }
 
- fun fromOriginPlayer(player: io.guohao.ser.Media.Player?): Player? =
+fun fromOriginPlayer(player: io.guohao.ser.Media.Player?): Player? =
     when (player) {
         io.guohao.ser.Media.Player.JAVA -> Player.JAVA
         io.guohao.ser.Media.Player.FLASH -> Player.FLASH
         else -> null
     }
 
- fun toOriginPlayer(player: Player?): io.guohao.ser.Media.Player? =
+fun toOriginPlayer(player: Player?): io.guohao.ser.Media.Player? =
     when (player) {
         Player.JAVA -> io.guohao.ser.Media.Player.JAVA
         Player.FLASH -> io.guohao.ser.Media.Player.FLASH
         else -> null
     }
 
- fun fromOriginMedia(media: io.guohao.ser.Media?): Media? = media?.let {
+fun fromOriginMedia(media: io.guohao.ser.Media?): Media? = media?.let {
     Media(
         media.uri,
         media.title,
@@ -69,7 +69,7 @@ enum class Player {
     )
 }
 
- fun toOriginMedia(media: Media?): io.guohao.ser.Media? = media?.let {
+fun toOriginMedia(media: Media?): io.guohao.ser.Media? = media?.let {
     io.guohao.ser.Media(
         media.uri,
         media.title,
@@ -85,5 +85,3 @@ enum class Player {
         media.copyright,
     )
 }
-
-

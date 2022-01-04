@@ -16,9 +16,14 @@
 
 package io.guohao.ser.testcase
 
-import io.guohao.ser.*
+import io.guohao.ser.BaseBenchmark
+import io.guohao.ser.KtJsonSerializer
+import io.guohao.ser.MediaContent
+import io.guohao.ser.MediaTransformer
+import io.guohao.ser.Serializer
 import io.guohao.ser.fastjson.FastJsonSerializer
 import io.guohao.ser.kt.KtMediaContentTransformer
+import io.guohao.ser.wrap
 
 private val serializers: Map<String, Serializer<MediaContent>> = mapOf(
     "fastjson" to (FastJsonSerializer(MediaContent::class.java) wrap MediaTransformer),

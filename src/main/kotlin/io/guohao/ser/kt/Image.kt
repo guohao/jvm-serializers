@@ -19,7 +19,7 @@ package io.guohao.ser.kt
 import kotlinx.serialization.Serializable
 
 @Serializable
- data class Image(
+data class Image(
     var uri: String? = null,
     var title: String? = null,
     var width: Int = 0,
@@ -31,7 +31,7 @@ enum class Size {
     SMALL, LARGE
 }
 
- fun fromOriginImage(image: io.guohao.ser.Image?): Image? =
+fun fromOriginImage(image: io.guohao.ser.Image?): Image? =
     image?.let {
         Image(
             image.uri,
@@ -42,7 +42,7 @@ enum class Size {
         )
     }
 
- fun toOriginImage(image: Image?): io.guohao.ser.Image? = image?.let {
+fun toOriginImage(image: Image?): io.guohao.ser.Image? = image?.let {
     io.guohao.ser.Image(
         image.uri,
         image.title,
@@ -52,14 +52,14 @@ enum class Size {
     )
 }
 
- fun fromOriginSize(player: io.guohao.ser.Image.Size?): Size? =
+fun fromOriginSize(player: io.guohao.ser.Image.Size?): Size? =
     when (player) {
         io.guohao.ser.Image.Size.SMALL -> Size.SMALL
         io.guohao.ser.Image.Size.LARGE -> Size.LARGE
         else -> null
     }
 
- fun toOriginSize(player: Size?): io.guohao.ser.Image.Size? =
+fun toOriginSize(player: Size?): io.guohao.ser.Image.Size? =
     when (player) {
         Size.SMALL -> io.guohao.ser.Image.Size.SMALL
         Size.LARGE -> io.guohao.ser.Image.Size.LARGE

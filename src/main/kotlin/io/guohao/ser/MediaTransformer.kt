@@ -39,6 +39,5 @@ object MediaTransformer : Transformer<MediaContent, MediaContent> {
             m.copyright
         )
 
-
     override fun transformFrom(r: MediaContent): MediaContent = copy(r)
 }
