@@ -69,8 +69,12 @@ tasks.test {
 benchmark {
     configurations {
         named("main") {
-            iterationTime = 5
-            iterationTimeUnit = "sec"
+            warmups = 3
+            iterations = 5
+            iterationTime = 10000
+            iterationTimeUnit = "ms"
+            outputTimeUnit = "ns"
+            mode = "AverageTime"
         }
     }
     targets {

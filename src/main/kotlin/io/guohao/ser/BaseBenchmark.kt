@@ -22,6 +22,7 @@ import org.openjdk.jmh.annotations.Benchmark
 import org.openjdk.jmh.annotations.BenchmarkMode
 import org.openjdk.jmh.annotations.Fork
 import org.openjdk.jmh.annotations.Measurement
+import org.openjdk.jmh.annotations.OutputTimeUnit
 import org.openjdk.jmh.annotations.Param
 import org.openjdk.jmh.annotations.Scope
 import org.openjdk.jmh.annotations.Setup
@@ -32,9 +33,10 @@ import java.util.concurrent.TimeUnit
 
 @State(Scope.Benchmark)
 @Fork(1)
-@Warmup(iterations = 1, time = 5, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 1, time = 5, timeUnit = TimeUnit.SECONDS)
-@BenchmarkMode(Mode.Throughput)
+@Warmup(iterations = 1, time = 5000, timeUnit = TimeUnit.MILLISECONDS)
+@Measurement(iterations = 1, time = 5000, timeUnit = TimeUnit.MILLISECONDS)
+@BenchmarkMode(Mode.AverageTime)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
 abstract class BaseBenchmark<T>(
     dataSource: String,
     private val nameToSerializer: Map<String, Serializer<T>>,
