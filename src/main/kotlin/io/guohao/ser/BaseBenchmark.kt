@@ -49,6 +49,11 @@ abstract class BaseBenchmark<T>(
     }
 
     @Benchmark
+    fun create() {
+        serializer!!.create(content)
+    }
+
+    @Benchmark
     fun serialize() {
         serializer!!.serialize(content)
     }

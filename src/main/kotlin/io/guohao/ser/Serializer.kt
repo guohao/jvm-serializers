@@ -28,4 +28,6 @@ interface Serializer<T> {
     fun serialize(data: T, outs: OutputStream)
 
     fun serialize(data: T): ByteArray
+
+    fun create(data: T) {}
 }

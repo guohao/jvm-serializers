@@ -30,6 +30,10 @@ class TransformedSerializer<T, R>(
     override fun serialize(data: T, outs: OutputStream) = delegate.serialize(transformer.transformTo(data), outs)
 
     override fun serialize(data: T): ByteArray = delegate.serialize(transformer.transformTo(data))
+
+    override fun create(data: T) {
+        transformer.transformTo(data)
+    }
 }
 
 infix fun <T, R> Serializer<R>.wrap(transformer: Transformer<T, R>) = TransformedSerializer(this, transformer)
