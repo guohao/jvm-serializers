@@ -16,9 +16,6 @@
 
 package io.guohao.ser
 
-import java.io.InputStream
-import java.io.OutputStream
-
 class TransformedSerializer<T, R>(
     private val delegate: Serializer<R>,
     private val transformer: Transformer<T, R>
