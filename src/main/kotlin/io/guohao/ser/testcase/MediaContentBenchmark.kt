@@ -20,12 +20,14 @@ import io.guohao.ser.*
 import io.guohao.ser.fastjson.FastJsonSerializer
 import io.guohao.ser.kt.KtMediaContentTransformer
 
+private val serializers: Map<String, Serializer<MediaContent>> = mapOf(
+    "fastjson" to (FastJsonSerializer(MediaContent::class.java) wrap MediaTransformer),
+    "kotlinx-json" to (KtJsonSerializer(io.guohao.ser.kt.MediaContent.serializer()) wrap KtMediaContentTransformer)
+)
+
 class MediaContentBenchmark :
     BaseBenchmark<MediaContent>(
         "/data/media.1.json",
-        mapOf(
-            "fastjson" to (FastJsonSerializer(MediaContent::class.java) wrap MediaTransformer),
-            "kotlinx-json" to (KtJsonSerializer(io.guohao.ser.kt.MediaContent.serializer()) wrap KtMediaContentTransformer)
-        ),
+        serializers,
         MediaContent::class.java
     )
