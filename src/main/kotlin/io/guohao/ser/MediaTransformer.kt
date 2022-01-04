@@ -16,7 +16,7 @@
 
 package io.guohao.ser
 
-class MediaTransformer : Transformer<MediaContent, MediaContent> {
+object MediaTransformer : Transformer<MediaContent, MediaContent> {
     override fun transformTo(t: MediaContent): MediaContent = copy(t)
 
     private fun copy(t: MediaContent): MediaContent =

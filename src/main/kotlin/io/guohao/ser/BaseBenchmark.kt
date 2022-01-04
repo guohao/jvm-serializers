@@ -28,32 +28,33 @@ import java.util.concurrent.TimeUnit
 @Warmup(iterations = 1, time = 5, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 1, time = 5, timeUnit = TimeUnit.SECONDS)
 @BenchmarkMode(Mode.Throughput)
-abstract class BaseBenchmark<OriginType, TransType>(
-    private val serializer: Serializer<TransType>,
-    private val dataSource: String,
-    private val transformer: Transformer<OriginType, TransType>,
-    private val type: Class<OriginType>
+abstract class BaseBenchmark<T>(
+    dataSource: String,
+    private val nameToSerializer: Map<String, Serializer<T>>,
+    private val type: Class<T>
 ) {
+    @Param("fastjson", "kotlinx-json")
+    var serializerName: String? = "fastjson"
+
     private final val content = this::class.java.getResource(dataSource)!!.readText(Charset.defaultCharset())
         .let { JSON.parseObject(it, type) }
 
-    private final val serialized: ByteArray = serializer.serialize(transformer.transformTo(content))
+    private var serializer: Serializer<T>? = null
+    private var serialized: ByteArray? = null
 
     @Setup
     fun setUp() {
+        this.serializer = nameToSerializer[serializerName]
+        this.serialized = serializer!!.serialize(content)
     }
-
-//    @Benchmark
-//    fun create() {
-//    }
 
     @Benchmark
     fun serialize() {
-        serializer.serialize(transformer.transformTo(content))
+        serializer!!.serialize(content)
     }
 
     @Benchmark
     fun deserialize() {
-        transformer.transformFrom(serializer.deserialize(serialized))
+        serializer!!.deserialize(serialized!!)
     }
 }

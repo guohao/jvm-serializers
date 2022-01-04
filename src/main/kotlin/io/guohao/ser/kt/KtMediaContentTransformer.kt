@@ -14,11 +14,13 @@
  *    limitations under the License.
  */
 
-package io.guohao.ser.fastjson
+package io.guohao.ser.kt
 
 import io.guohao.ser.MediaContent
-import io.guohao.ser.MediaTransformer
-import io.guohao.ser.testcase.MediaContentBenchmark
+import io.guohao.ser.Transformer
 
-class FastjsonBenchmark :
-    MediaContentBenchmark<MediaContent>(FastJsonSerializer(MediaContent::class.java), MediaTransformer())
+object KtMediaContentTransformer : Transformer<MediaContent, io.guohao.ser.kt.MediaContent> {
+    override fun transformTo(t: MediaContent): io.guohao.ser.kt.MediaContent = fromOriginMediaContent(t)
+
+    override fun transformFrom(r: io.guohao.ser.kt.MediaContent): MediaContent = toOriginMediaContent(r)
+}
