@@ -5,5 +5,7 @@ A modern serializers' benchmark for jvm environment. This project is inspired by
 ## Run
 Just
 ```
-./gradlew benchmark
+./gradlew benchmark jmhReport
 ```
+
+Report will be generated at `build/reports/benchmarks/main/${time}/index.html`
